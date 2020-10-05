@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 3.2.2 (Python 3.8.0 on darwin)" generated="20201005 20:35:19.323" rpa="false">
+<suite id="s1" name="Facts By Id" source="/Users/macintosh/PycharmProjects/API_testing/robot/Tests/facts_by_id.robot">
+<test id="s1-t1" name="Get Facts By Id">
+<kw name="Run Keyword" library="BuiltIn">
+<doc>Executes the given keyword with the given arguments.</doc>
+<arguments>
+<arg>Get Facts By Id</arg>
+<arg>${id}</arg>
+</arguments>
+<assign>
+<var>${response}</var>
+</assign>
+<kw name="Get Facts By Id" library="Libraries.CatFacts">
+<arguments>
+<arg>${id}</arg>
+</arguments>
+<status status="PASS" starttime="20201005 20:35:19.568" endtime="20201005 20:35:20.137"></status>
+</kw>
+<msg timestamp="20201005 20:35:20.137" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20201005 20:35:19.568" endtime="20201005 20:35:20.137"></status>
+</kw>
+<kw name="Set Suite Variable" library="BuiltIn">
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<arguments>
+<arg>${response}</arg>
+<arg>${response}</arg>
+</arguments>
+<msg timestamp="20201005 20:35:20.138" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20201005 20:35:20.138" endtime="20201005 20:35:20.138"></status>
+</kw>
+<status status="PASS" starttime="20201005 20:35:19.567" endtime="20201005 20:35:20.138" critical="yes"></status>
+</test>
+<test id="s1-t2" name="Validate Response Codes">
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${response.status_code}</arg>
+</arguments>
+<assign>
+<var>${response_code}</var>
+</assign>
+<msg timestamp="20201005 20:35:20.140" level="INFO">${response_code} = 200</msg>
+<status status="PASS" starttime="20201005 20:35:20.139" endtime="20201005 20:35:20.140"></status>
+</kw>
+<kw name="Set Variable If" library="BuiltIn">
+<doc>Sets variable based on the given condition.</doc>
+<arguments>
+<arg>${response_code} != 200</arg>
+<arg>Getting status with ${response.status_code} while fetching cat facts with parameter</arg>
+<arg>${EMPTY}</arg>
+</arguments>
+<assign>
+<var>${failedReason}</var>
+</assign>
+<msg timestamp="20201005 20:35:20.140" level="INFO">${failedReason} = </msg>
+<status status="PASS" starttime="20201005 20:35:20.140" endtime="20201005 20:35:20.140"></status>
+</kw>
+<kw name="Should Be Empty" library="BuiltIn">
+<doc>Verifies that the given item is empty.</doc>
+<arguments>
+<arg>${failedReason}</arg>
+</arguments>
+<msg timestamp="20201005 20:35:20.141" level="INFO">Length is 0</msg>
+<status status="PASS" starttime="20201005 20:35:20.141" endtime="20201005 20:35:20.141"></status>
+</kw>
+<status status="PASS" starttime="20201005 20:35:20.139" endtime="20201005 20:35:20.141" critical="yes"></status>
+</test>
+<test id="s1-t3" name="Validate Response ID And Type Of Animal">
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${response.json()}</arg>
+</arguments>
+<assign>
+<var>${response_data}</var>
+</assign>
+<msg timestamp="20201005 20:35:20.142" level="INFO">${response_data} = {'used': False, 'source': 'api', 'type': 'cat', 'deleted': False, '_id': '591f98d1d1f17a153828aade', '__v': 0, 'text': 'Cats have individual preferences for scratching surfaces and angles. Some are ho...</msg>
+<status status="PASS" starttime="20201005 20:35:20.142" endtime="20201005 20:35:20.142"></status>
+</kw>
+<kw name="Log" library="BuiltIn">
+<doc>Logs the given message with the given level.</doc>
+<arguments>
+<arg>${response_data}</arg>
+</arguments>
+<msg timestamp="20201005 20:35:20.143" level="INFO">{'used': False, 'source': 'api', 'type': 'cat', 'deleted': False, '_id': '591f98d1d1f17a153828aade', '__v': 0, 'text': 'Cats have individual preferences for scratching surfaces and angles. Some are horizontal scratchers while others exercise their claws vertically.', 'updatedAt': '2020-08-23T20:20:01.611Z', 'createdAt': '2018-01-04T01:10:54.673Z', 'status': {'verified': True, 'sentCount': 1}, 'user': '5a9ac18c7478810ea6c06381'}</msg>
+<status status="PASS" starttime="20201005 20:35:20.143" endtime="20201005 20:35:20.143"></status>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${response_data['_id']}</arg>
+</arguments>
+<assign>
+<var>${response_id}</var>
+</assign>
+<msg timestamp="20201005 20:35:20.143" level="INFO">${response_id} = 591f98d1d1f17a153828aade</msg>
+<status status="PASS" starttime="20201005 20:35:20.143" endtime="20201005 20:35:20.143"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${response_id}</arg>
+<arg>${id}</arg>
+<arg>recieved id doesn't match with id provided by user</arg>
+</arguments>
+<status status="PASS" starttime="20201005 20:35:20.144" endtime="20201005 20:35:20.144"></status>
+</kw>
+<kw name="Should Match Regexp" library="BuiltIn">
+<doc>Fails if ``string`` does not match ``pattern`` as a regular expression.</doc>
+<arguments>
+<arg>${response_id}</arg>
+<arg>^([a-zA-Z0-9])*$</arg>
+<arg>invalid data type of id</arg>
+</arguments>
+<status status="PASS" starttime="20201005 20:35:20.144" endtime="20201005 20:35:20.145"></status>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>${response_data['type']}</arg>
+</arguments>
+<assign>
+<var>${animal_type}</var>
+</assign>
+<msg timestamp="20201005 20:35:20.145" level="INFO">${animal_type} = cat</msg>
+<status status="PASS" starttime="20201005 20:35:20.145" endtime="20201005 20:35:20.145"></status>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<arguments>
+<arg>isinstance('${animal_type}', str)</arg>
+</arguments>
+<assign>
+<var>${is_string}</var>
+</assign>
+<msg timestamp="20201005 20:35:20.146" level="INFO">${is_string} = True</msg>
+<status status="PASS" starttime="20201005 20:35:20.145" endtime="20201005 20:35:20.146"></status>
+</kw>
+<status status="PASS" starttime="20201005 20:35:20.141" endtime="20201005 20:35:20.146" critical="yes"></status>
+</test>
+<status status="PASS" starttime="20201005 20:35:19.325" endtime="20201005 20:35:20.147"></status>
+</suite>
+<statistics>
+<total>
+<stat pass="3" fail="0">Critical Tests</stat>
+<stat pass="3" fail="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="3" fail="0" id="s1" name="Facts By Id">Facts By Id</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
