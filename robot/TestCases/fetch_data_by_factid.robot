@@ -1,3 +1,8 @@
+#Description: Fetch data using factId for Cat Facts API
+#Reference: https://alexwohlbruck.github.io/cat-facts/
+#           https://alexwohlbruck.github.io/cat-facts/docs/
+#           https://alexwohlbruck.github.io/cat-facts/docs/endpoints/facts.html
+
 *** Settings ***
 Library    Libraries.CatFacts
 
@@ -6,12 +11,13 @@ ${factid}    591f98d1d1f17a153828aade
 
 *** Test Cases ***
 Get Facts By factId
-    [Documentation]
+    [Documentation]    This Step retrieve the animal facts using 'factid' by calling python method
+    ...    "get_facts_by_id" of CatFacts class
     ${response}    Run Keyword    Get Facts By Id   ${factid}
     Set Suite Variable    ${response}    ${response}
 
 Validate Response Codes
-    [Documentation]
+    [Documentation]     this step validate the response code
     ${response_code}    Set Variable    ${response.status_code}
     ${failedReason}    Set Variable If    ${response_code} != 200
     ...    Getting status with ${response.status_code} while fetching cat facts with parameter    ${EMPTY}
@@ -29,4 +35,8 @@ Validate Response ID And Type Of Animal
     ${animal_type}    Set Variable    ${response_data['type']}
     ${is_string}=   Evaluate     isinstance('${animal_type}', str)
 
-
+Validate Response Header
+    [Documentation]     this step validate the headers from response header
+    ${header_response}    Set Variable    ${response.headers}
+    ${content_type}     Set Variable     ${header_response['Content-Type']}
+    Should Be True    '''${content_type}''' == '''application/json; charset=utf-8'''    invalid content type returned

@@ -12,19 +12,19 @@ ${amount}    100
 
 *** Test Cases ***
 Get All The Facts
-    [Documentation]
+    [Documentation]    This Step retrieve the animal facts by calling python method "get_facts" of CatFacts class
     ${response}    Run Keyword    Get Facts    ${animal_type}    ${amount}
     Set Suite Variable    ${response}    ${response}
 
 Validate Response Codes
-    [Documentation]
+    [Documentation]    this step validate the response code
     ${response_code}    Set Variable    ${response.status_code}
     ${failedReason}    Set Variable If    ${response_code} != 200
     ...    Getting status with ${response.status_code} while fetching cat facts with parameter    ${EMPTY}
     Should Be Empty    ${failedReason}
 
 Validate Response Data
-    [Documentation]
+    [Documentation]     this step validate the attribute like 'type' & '_id' from the response
     ${response_data}    Set Variable    ${response.json()}
     Log    ${response_data}
     FOR    ${index}    IN RANGE    0    ${amount}
@@ -37,7 +37,7 @@ Validate Response Data
     END
 
 Validate Response Header
-    [Documentation]
+    [Documentation]     this step validate the headers from response header
     ${header_response}    Set Variable    ${response.headers}
     ${content_type}     Set Variable     ${header_response['Content-Type']}
     Should Be True    '''${content_type}''' == '''application/json; charset=utf-8'''    invalid content type returned
