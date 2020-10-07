@@ -1,7 +1,7 @@
 #Description: Fetch data using factId for Cat Facts API
 
-#if I would have had more time,i would like to create keyword(refers to a callable, reusable, lower-level test function that performs a specific task)
-# of all common validation steps and place it in keyword folder. So that such keywords will be reuseable across the framework
+#if I would have had more time,i would like to create keywords(refers to a callable, reusable, lower-level test function that performs a specific task)
+# These keywords will represent common validation steps and will be place inside keyword(keywords.robot) folder. So that such keywords can be reused across the framework.
 
 *** Settings ***
 Library    Libraries.CatFacts
