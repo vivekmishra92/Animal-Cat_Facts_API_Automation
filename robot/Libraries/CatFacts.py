@@ -1,9 +1,12 @@
 """
-Description         function for Retieve data for Cats facts
+Description         function for Retrieve data for Cats facts
 Reference: https://alexwohlbruck.github.io/cat-facts/
         https://alexwohlbruck.github.io/cat-facts/docs/
         https://alexwohlbruck.github.io/cat-facts/docs/endpoints/facts.html
+
+if I would have had more time, then i would have written UNIT TESTS for below python functions
 """
+
 import requests
 import socket
 
@@ -23,7 +26,6 @@ def http_send(method, url, parameters=None, headers=None):
             response = requests.get(url, params=parameters, headers=headers)
     except (requests.exceptions.ConnectionError, socket.gaierror) as err:
         print(("Could not send %s %s due to %s" % (method, url, err)))
-        #response = failed_response_data("GET", url, None, err)
     return response
 
 class CatFacts(object):

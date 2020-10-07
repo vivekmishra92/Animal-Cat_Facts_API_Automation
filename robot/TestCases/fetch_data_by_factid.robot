@@ -1,7 +1,7 @@
 #Description: Fetch data using factId for Cat Facts API
-#Reference: https://alexwohlbruck.github.io/cat-facts/
-#           https://alexwohlbruck.github.io/cat-facts/docs/
-#           https://alexwohlbruck.github.io/cat-facts/docs/endpoints/facts.html
+
+#if I would have had more time,i would like to create keyword(refers to a callable, reusable, lower-level test function that performs a specific task)
+# of all common validation steps and place it in keyword folder. So that such keywords will be reuseable across the framework
 
 *** Settings ***
 Library    Libraries.CatFacts
